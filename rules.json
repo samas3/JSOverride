@@ -1,5 +1,0 @@
-{
-  "rules": {
-    "https://example\\.com/example\\.js": "local/example.js"
-  }
-}

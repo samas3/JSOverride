@@ -8,7 +8,6 @@
 JSOverride/
 ├── manifest.json      # 插件配置文件
 ├── content.js         # 内容脚本（核心功能）
-├── rules.json         # 替换规则配置
 ├── local/             # 本地脚本目录
 │   └── example.js     # 示例本地脚本
 └── README.md          # 使用说明
@@ -23,15 +22,13 @@ JSOverride/
 
 ## 配置规则
 
-编辑 `rules.json` 文件来配置替换规则：
+编辑 `content.js` 文件中的 `replacementRules` 对象来配置替换规则：
 
-```json
-{
-  "rules": {
+```js
+const replacementRules = {
     "https://example\\.com/example\\.js": "local/example.js",
     "https://cdn\\.jsdelivr\\.net/npm/jquery@.*/jquery\\.min\\.js": "local/jquery.min.js",
     "https://code\\.jquery\\.com/jquery-.*\\.min\\.js": "local/jquery.min.js"
-  }
 }
 ```
 
@@ -53,21 +50,6 @@ JSOverride/
 3. **刷新页面**: 访问目标网页，插件会自动进行替换
 4. **查看控制台**: 打开开发者工具控制台查看替换日志
 
-## 示例
-
-假设你想替换 `https://example.com/app.js` 为本地版本：
-
-1. 将本地脚本保存为 `local/app.js`
-2. 在 `rules.json` 中添加规则：
-   ```json
-   {
-     "rules": {
-       "https://example\\.com/app\\.js": "local/app.js"
-     }
-   }
-   ```
-3. 访问 `https://example.com`，插件会自动替换脚本
-
 ## 调试信息
 
 插件会在浏览器控制台输出调试信息：
@@ -77,7 +59,6 @@ JSOverride/
 
 ## 注意事项
 
-- 确保本地文件路径在 `rules.json` 中正确配置
 - 正则表达式需要正确转义特殊字符（如 `.` 需要写成 `\\.`）
 - 插件只替换 `<script src="...">` 标签，不处理内联脚本
 - 替换后的脚本通过 Chrome 扩展的 `chrome.runtime.getURL()` 加载
