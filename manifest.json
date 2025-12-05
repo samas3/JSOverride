@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "JS Override",
+  "version": "1.0.0",
+  "description": "替换远程网页上的 JavaScript 脚本为本地版本",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["*.js", "rules.json"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}
